@@ -1,0 +1,7 @@
+public
+node_modules
+*.cjs
+types.d.ts
+*.config.js
+*.config.ts
+*.json
