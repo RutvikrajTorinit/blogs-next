@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Cookies from "js-cookie";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import { Label } from "../../../../components/ui/label";
+import { Input } from "../../../../components/ui/input";
+import { Button } from "../../../../components/ui/button";
+
+// import { Label } from "@/components/ui/label";
+// import { Input } from "@/components/ui/input";
+// import { Button } from "@/components/ui/button";
 
 interface LOGIN_DATA {
   email: string;
@@ -18,7 +21,7 @@ const initialState: LOGIN_DATA = {
 };
 
 const LoginForm: React.FC = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
   const [loginData, setLoginData] = useState<LOGIN_DATA>(initialState);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,15 +34,22 @@ const LoginForm: React.FC = () => {
     setIsLoading(true);
     e.preventDefault();
     Cookies.set("user", "email", { path: "/" });
-    router.push("/home");
-    setIsLoading(false);
+    // router.push("/home");
   };
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form className="space-y-6" onSubmit={handleLogin}>
+      <form
+        role="form"
+        data-testid="test-1"
+        className="space-y-6"
+        onSubmit={handleLogin}
+      >
         <div>
-          <Label className="block text-sm font-medium leading-6 text-gray-900">
+          <Label
+            role="Label"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
             Email address
           </Label>
           <div className="mt-2">
