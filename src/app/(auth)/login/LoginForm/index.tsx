@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Cookies from "js-cookie";
+import { getProviders, signIn } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,8 +18,10 @@ const initialState: LOGIN_DATA = {
   password: ""
 };
 
-const LoginForm: React.FC = () => {
+const LoginForm = () => {
   const router = useRouter();
+
+  const providers = getProviders();
 
   const [loginData, setLoginData] = useState<LOGIN_DATA>(initialState);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,17 +30,17 @@ const LoginForm: React.FC = () => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setIsLoading(true);
     e.preventDefault();
     Cookies.set("user", "email", { path: "/" });
-    router.push("/home");
+    router.push("/");
     setIsLoading(false);
   };
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form className="space-y-6" onSubmit={handleLogin}>
+      <form className="space-y-6">
         <div>
           <Label className="block text-sm font-medium leading-6 text-gray-900">
             Email address
@@ -79,8 +82,17 @@ const LoginForm: React.FC = () => {
           type="submit"
           isLoading={isLoading}
           disabled={isLoading}
+          onClick={handleLogin}
         >
           Sign in
+        </Button>
+
+        <Button
+          className="w-full"
+          type="submit"
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+        >
+          Login using Google
         </Button>
       </form>
     </div>
