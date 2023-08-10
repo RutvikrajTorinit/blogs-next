@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import Cookies from "js-cookie";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface LOGIN_DATA {
   email: string;
@@ -32,14 +32,21 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     Cookies.set("user", "email", { path: "/" });
     router.push("/home");
-    setIsLoading(false);
   };
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form className="space-y-6" onSubmit={handleLogin}>
+      <form
+        role="form"
+        data-testid="test-1"
+        className="space-y-6"
+        onSubmit={handleLogin}
+      >
         <div>
-          <Label className="block text-sm font-medium leading-6 text-gray-900">
+          <Label
+            role="Label"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
             Email address
           </Label>
           <div className="mt-2">
