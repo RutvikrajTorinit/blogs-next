@@ -2,13 +2,10 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { Label } from "../../../../components/ui/label";
-import { Input } from "../../../../components/ui/input";
-import { Button } from "../../../../components/ui/button";
 
-// import { Label } from "@/components/ui/label";
-// import { Input } from "@/components/ui/input";
-// import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface LOGIN_DATA {
   email: string;
@@ -21,7 +18,7 @@ const initialState: LOGIN_DATA = {
 };
 
 const LoginForm: React.FC = () => {
-  // const router = useRouter();
+  const router = useRouter();
 
   const [loginData, setLoginData] = useState<LOGIN_DATA>(initialState);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,7 +31,7 @@ const LoginForm: React.FC = () => {
     setIsLoading(true);
     e.preventDefault();
     Cookies.set("user", "email", { path: "/" });
-    // router.push("/home");
+    router.push("/home");
   };
 
   return (
